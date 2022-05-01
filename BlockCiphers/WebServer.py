@@ -1,7 +1,7 @@
-from blockEncryptions import generateRandomByteKey
 from blockEncryptions import padByteArray
 from blockEncryptions import CBCEncryptBinary
 from blockEncryptions import CBCDecryptBinary
+import os
 
 numUsers = 456
 numSessions = 31337
@@ -21,8 +21,8 @@ def CDCattack(targetString, encryptedMsg, decryptedMsg):
     return newStr + encryptedMsg[len(targetString):]
 
 def submit(userData):
-    key = generateRandomByteKey(blockSizeBytes)
-    iv = generateRandomByteKey(blockSizeBytes)
+    key = os.urandom(blockSizeBytes)
+    iv = os.urandom(blockSizeBytes)
     userData = urlEncodeString(userData)
     userString = "userid="+str(numUsers)+';userdata='+userData+';session-id='+str(numSessions)
     userString = padByteArray(userString.encode())
@@ -39,4 +39,3 @@ result = submit("asdf;alksdjf;alkjfasdlfkjf")
 decryptedStr = CBCDecryptBinary(result[0], result[1], result[2])
 encryptedAttack = CDCattack(";admin=true;", result[2], decryptedStr)
 print(verify(result[0], result[1], encryptedAttack))
-
