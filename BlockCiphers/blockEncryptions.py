@@ -133,7 +133,6 @@ def encryptBMP(filepath):
         file.write(cbcEncryptedMessage)
 
 
-# Doesn't work yet
 def encryptFile(filepath):
     key1 = os.urandom(blockSizeBytes)
     key2 = os.urandom(blockSizeBytes)
@@ -158,14 +157,14 @@ def encryptFile(filepath):
     with open('CBC.bmp', 'wb+') as file:
         file.write(cbcEncryptedMessage)
 
-    ecbDecryptedMessage = ECBDecryptBinary(key1, ecbEncryptedMessage[54:])
-    cbcDecryptedMessage = CBCDecryptBinary(key2, initVector, cbcEncryptedMessage[54:])
+    ecbDecryptedMessage = ECBDecryptBinary(key1, ecbEncryptedMessage)
+    cbcDecryptedMessage = CBCDecryptBinary(key2, initVector, cbcEncryptedMessage)
 
     with open('ECBdec.bmp', 'wb+') as file:
-        file.write(header + ecbDecryptedMessage)
+        file.write(header + ecbDecryptedMessage[54:])
 
     with open('CBCdec.bmp', 'wb+') as file:
-        file.write(header + cbcDecryptedMessage)
+        file.write(header + cbcDecryptedMessage[54:])
 
 
 encryptFile('cp-logo.bmp')
