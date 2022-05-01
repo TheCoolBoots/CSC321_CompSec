@@ -169,7 +169,3 @@ def encryptFile(filepath):
 
 encryptFile('cp-logo.bmp')
 # encryptBMP('cp-logo.bmp')
-
-# print(padPlaintext("ABCDEF").encode('ascii'))
-# tmp = ECBEncrypt("aaaaaaaaaaaaaaaa", "b"*16+"c"*8)
-# print(tmp.encode('ascii'))
