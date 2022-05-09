@@ -1,6 +1,8 @@
 import random
 import os
+from unicodedata import name
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from pip import main
 
 
 blockSizeBytes = 16
@@ -167,5 +169,5 @@ def encryptFile(filepath):
         file.write(header + cbcDecryptedMessage[54:])
 
 
-encryptFile('cp-logo.bmp')
+# encryptFile('cp-logo.bmp')
 # encryptBMP('cp-logo.bmp')

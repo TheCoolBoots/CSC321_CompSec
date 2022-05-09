@@ -27,6 +27,9 @@ g = p
 a = random.randint(0, p)
 b = random.randint(0, p)
 
+# mallory's private key
+m = random.randint(0, p)
+
 print(a,b)
 
 # Alice
@@ -37,26 +40,28 @@ B = (g ** b) % p
 
 print(A,B)
 
-# A, B exchanged between Alice and Bob
+# Alice sends A over the network
+# Mallory intercepts A and changes A to = p
+A = p
 
-# Alice calculates private combined key with B
+# Bob sends B over the network
+# Mallory intercepts B and changes B to = p
+B = p
+
+# Alice calculates private combined key with modified B
 sa = (B ** a) % p
 
-# Bob calculates private combined key with A
+# Bob calculates private combined key with modified A
 sb = (A ** b) % p
 
+# sa, sb will always equal 0
 print(sa, sb)
-
-# print(sa == sb)
 
 aliceKeyHash = SHA256.new()
 aliceKeyHash.update(sa.to_bytes(8, 'big'))
 
 bobKeyHash = SHA256.new()
 bobKeyHash.update(sb.to_bytes(8, 'big'))
-
-# print(aliceKeyHash.hexdigest()[0:16])
-# print(bobKeyHash.hexdigest()[0:16])
 
 aliceSend = padByteArray(b'Hello There')
 
@@ -71,18 +76,7 @@ bobRecieved = bobCipher.decrypt(aliceMessage)
 print(bobRecieved)
 
 
-# Mallory decryption
-# if g = 1, shared secret will always be 1, hash will always be SHA256(1)
-# if g = p-1, shared secret will always be 1, hash will always be SHA256(1)
-# mallorySecret = 1
-# malloryKeyHash = SHA256.new()
-# malloryKeyHash.update(mallorySecret.to_bytes(8, 'big'))
-# malloryCipher = AES.new(malloryKeyHash.hexdigest()[0:16], AES.MODE_CBC, malloryKeyHash.hexdigest()[16:32])
-# malloryRecieved = malloryCipher.decrypt(aliceMessage)
-
-# print(malloryRecieved)
-
-# if g = p, shared secret will always be 0, hash will always be SHA256(0)
+# if A, B = p, shared secret will always be 0, hash will always be SHA256(0)
 mallorySecret = 0
 malloryKeyHash = SHA256.new()
 malloryKeyHash.update(mallorySecret.to_bytes(8, 'big'))

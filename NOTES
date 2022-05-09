@@ -32,4 +32,23 @@ Quantum resistant Cryptography
     symmetric algorithms (like AES) are quantum resistant
         RSA, Diffie Hellman, ECC is not
     NIST = quantum hardened key exchange algorithm
-    
+
+
+Message Authentication Codes
+MAC = Ck(m)
+    send both m and MAC tag
+    recipient computes Ck(m) and compares their computed tag
+    if tags are equal, message was not modified
+
+MAC application: Tripwire in antivirus software
+    at install time, calculates MAC tag of each file
+    when virus scanning, checks if MAC is same; if different, file may have been modified by malicious attacker
+
+Extention attack
+    people add additional parts in a message and its unable to be traced
+    ** video on slides about math of why Merkle-Damgard is insecure
+
+SECURE HMAC
+    2 keys
+    K1, K2
+    h(K2 | h(K1 | M))
