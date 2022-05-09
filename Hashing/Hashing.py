@@ -4,6 +4,9 @@ import os
 import bcrypt
 from nltk.corpus import words
 import nltk
+import numpy as np
+from matplotlib import pyplot as plt
+
 
 def task1_a():
     shaHash = SHA256.new()  
@@ -32,7 +35,7 @@ def task1_c(hashWidth):
         shaHash.update(bytes(currentNum))
         currentHash = shaHash.hexdigest()[0:hashWidth]
 
-        if attemptedHashes[currentHash] == None:
+        if currentHash not in attemptedHashes:
             attemptedHashes[currentHash] = currentNum
         elif attemptedHashes[currentHash] != currentNum:
             print(f'{currentNum} and {attemptedHashes[currentHash]} both share the first {hashWidth} bytes: {currentHash}')
@@ -44,12 +47,23 @@ def task1_c(hashWidth):
     print(f'Time elapsed = {endTime - startTime}')
     print(f'Number of inputs tried = {currentNum}')
     print(f'Datapoint for graph: ({hashWidth}, {endTime - startTime})')
-    return hashWidth, endTime - startTime
+    return hashWidth, endTime - startTime, currentNum
 
 def task1_c_generateData():
+    x = []
+    y = []
+    z = []
     for i in range(8, 50):
         print(f'Digest Size = {i}')
-        task1_c(i)
+        a = task1_c(i)
+        x.append(a[0])
+        y.append(a[1].total_seconds())
+        z.append(a[2])
+    plt.subplot(1, 2 ,1)
+    plt.plot(x, y, '-')
+    plt.subplot(1, 2, 2)
+    plt.plot(x, z, '-')
+    plt.show()
 
 def importUserHashes(filepath):
     with open(filepath, 'rb') as inputFile:
@@ -63,7 +77,7 @@ def importUserHashes(filepath):
 
 
 def task2():
-    userHashes = importUserHashes('Hashing\shadow.txt')
+    userHashes = importUserHashes('shadow.txt')
     nltk.download('words')
     filtered = list(filter(lambda word: len(word) >= 6 and len(word) <= 10, words.words()))
     filtered = [s.encode() for s in filtered]
@@ -81,4 +95,4 @@ def task2():
                 print(f'{i} words attempted for {user}')
 
 
-task2()
+task1_c_generateData()
