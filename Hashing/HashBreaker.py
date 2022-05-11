@@ -1,5 +1,8 @@
 from nltk.corpus import words
+import nltk
 import bcrypt
+
+nltk.download('words')
 
 Bilbo = b"$2b$08$J9FW66ZdPI2nrIMcOxFYI.qx268uZn.ajhymLP/YHaAsfBGP3Fnmq" # = welcome
 Gandalf = b"$2b$08$J9FW66ZdPI2nrIMcOxFYI.q2PW6mqALUl2/uFvV9OFNPmHGNPa6YC" # = wizard
@@ -19,23 +22,26 @@ Durin = b"$2b$13$6ypcazOOkUT/a7EwMuIjH.qbdqmHPDAC9B5c37RT9gEw18BX6FOay" # purron
 hashes = [Balin, Dwalin, Oin, Gloin, Dori, Nori, Ori, Bifur, Bofur, Durin]
 
 filteredWords = []
+
 for word in words.words():
     if len(word) >= 6 and len(word) <= 10:
         filteredWords.append(word.encode('utf-8'))
-        print(len(filteredWords))
 
-    with open('foundPasswords.txt', 'w') as outFile:
-        for userID, userHash in enumerate(hashes):
-            checked = 0
-            found = False
-            for word in filteredWords:
-                if bcrypt.checkpw(word, userHash):
-                    print(word)
-                    outFile.write(word.decode('utf-8') + '\n')
-                    found = True
-                    break
-                checked += 1
-                if checked % 10000 == 0:
-                    print(f'checked {checked} hashes for user {userID}')
-            if not found:
-                print(f'password not found for user {userID}')
+print(len(filteredWords))
+
+
+with open('foundPasswords.txt', 'w') as outFile:
+    for userID, userHash in enumerate(hashes):
+        checked = 0
+        found = False
+        for word in filteredWords:
+            if bcrypt.checkpw(word, userHash):
+                print(word)
+                outFile.write(word.decode('utf-8') + '\n')
+                found = True
+                break
+            checked += 1
+            if checked % 10000 == 0:
+                print(f'checked {checked} hashes for user {userID}')
+        if not found:
+            print(f'password not found for user {userID}')

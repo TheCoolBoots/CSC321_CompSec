@@ -1,10 +1,6 @@
 from Crypto.Hash import SHA256
 import datetime as t
 import os
-import bcrypt
-from nltk.corpus import words
-import nltk
-import numpy as np
 from matplotlib import pyplot as plt
 
 
@@ -31,14 +27,18 @@ def task1_c(hashWidth):
     currentNum = 0
     startTime = t.datetime.now()
 
+    bitmask = int('1'*hashWidth, 2)
+
     while True:
         shaHash.update(bytes(currentNum))
-        currentHash = shaHash.hexdigest()[0:hashWidth]
+        # currentHash = shaHash.hexdigest()[0:hashWidth]
+        currentHash = int.from_bytes(shaHash.digest(), 'little')
+        currentHash = currentHash & bitmask
 
         if currentHash not in attemptedHashes:
             attemptedHashes[currentHash] = currentNum
         elif attemptedHashes[currentHash] != currentNum:
-            print(f'{currentNum} and {attemptedHashes[currentHash]} both share the first {hashWidth} bytes: {currentHash}')
+            print(f'{currentNum} and {attemptedHashes[currentHash]} both share the first {hashWidth} bits: {currentHash}')
             break
         
         currentNum += 1
@@ -76,4 +76,4 @@ def importUserHashes(filepath):
     return userHashes
 
 
-# task1_c_generateData()
+task1_c_generateData()
