@@ -76,23 +76,4 @@ def importUserHashes(filepath):
     return userHashes
 
 
-def task2():
-    userHashes = importUserHashes('shadow.txt')
-    nltk.download('words')
-    filtered = list(filter(lambda word: len(word) >= 6 and len(word) <= 10, words.words()))
-    filtered = [s.encode() for s in filtered]
-
-    hash = bcrypt.hashpw(b"registrationsucks", b"$2b$08$J9FW66ZdPI2nrIMcOxFYI.")
-    print(bcrypt.checkpw(b'registrationsucks', hash))
-
-    print(len(filtered))
-    
-    for user, saltHash in userHashes.items():
-        for i, word in enumerate(filtered): 
-            if(bcrypt.checkpw(word, saltHash['saltHash'])):
-                print(f"{user}'s password is: {word}")
-            if(i%10000 == 0):
-                print(f'{i} words attempted for {user}')
-
-
-task1_c_generateData()
+# task1_c_generateData()
