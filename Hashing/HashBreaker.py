@@ -19,7 +19,8 @@ Ori = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8OiERmh0dh8AiNcf7ON3O3P0GWTABKh0O" # airway
 Bifur = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8OMoFL0k33O8Lcq33f6AznAZ/cL1LAOyK" # corrosible
 Bofur = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8Ose2KNe821.l2h5eLffzWoP01DlQb72O" # libellate
 Durin = b"$2b$13$6ypcazOOkUT/a7EwMuIjH.qbdqmHPDAC9B5c37RT9gEw18BX6FOay" # purrone
-hashes = [Balin, Dwalin, Oin, Gloin, Dori, Nori, Ori, Bifur, Bofur, Durin]
+hashes = [Bilbo, Gandalf, Thorin, Fili, Kili] #Balin, Dwalin, Oin, Gloin, Dori, Nori, Ori, Bifur, Bofur, Durin]
+
 
 filteredWords = []
 
