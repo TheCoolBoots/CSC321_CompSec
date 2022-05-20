@@ -31,9 +31,9 @@ def task1_c(hashWidth):
     bitmask = int('1'*hashWidth, 2)
 
     while True:
-        shaHash.new(bytes(currentNum))
-        # shaHash.update()
-        # currentHash = shaHash.hexdigest()[0:hashWidth]
+        shaHash.new()
+        # shaHash.update(bytes(currentNum))
+        currentHash = shaHash.hexdigest()[0:hashWidth]
         currentHash = int.from_bytes(shaHash.digest(), 'little')
         currentHash = currentHash & bitmask
 
@@ -48,14 +48,14 @@ def task1_c(hashWidth):
     endTime = t.datetime.now()
     # print(f'Time elapsed = {endTime - startTime}')
     print(f'Number of inputs tried = {currentNum}')
-    # print(f'Datapoint for graph: ({hashWidth}, {endTime - startTime})')
+    print(f'Datapoint for graph: ({hashWidth}, {endTime - startTime})')
     return hashWidth, endTime - startTime, currentNum
 
 def task1_c_generateData():
     x = []
     y = []
     z = []
-    for i in range(44, 50):
+    for i in range(8, 50, 2):
         print(f'Digest Size = {i}')
         a = task1_c(i)
         # x.append(a[0])
