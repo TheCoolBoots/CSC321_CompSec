@@ -54,3 +54,75 @@ SECURE HMAC
     h(K2 | h(K1 | M))
 
 
+design principles
+    economy of mechanism
+    fail safe defaults
+    complete mediation
+    open design
+    separation of privilege
+    least privilege
+    least common mechanism
+    psychological acceptability
+    work factor 
+    compromise recording
+
+build security in, don't bolt-on
+
+Virus
+    malicious software attached to a document, file, program, and shared by people
+    // user has to run the virus
+
+    Phases:
+        dormant
+        propagation
+        triggering
+            day and time, condition, etc.
+        execution
+    classification:
+        virus invectors, macro virus, boot sector infector (screw up computer bios/startup), multipartite virus
+        polymorphic - evasion based on variable encryption key
+        metamorphic - evasion based on code rewrite
+
+Worms
+    rapidly replicates and spreads to any device within the network
+    // replicates it self; VIRUS DOES NOT
+    John Von Neumann
+        suggested a program that could replicate itself
+    propagation techniques
+        email
+        file sharing
+        remote execution/login
+Trojans
+    malicious software disguised as useful software
+
+
+detection
+    old
+        based on fingerprints
+    new
+        based on behaviors
+
+iloveyou worm analysis
+    virtual basic script created by Onel De Guzman
+    24 yr old college student in Manila, Philippines
+    10% of all computers infected
+    5-8 billion in damage
+    10-15 billion to clean up
+    many institutions just shut down their email servers to stop the spread
+
+    copied itself over windows dll's that auto run on boot
+    hides mp3 files
+    deletes other files
+
+    creates html file with iteself embedded in it
+    sends it as a link in email
+    looks at contacts and sends email to all of them
+    
+
+
+malware payloads
+    logic bombs, backdoors
+    ransomware
+    spyware, adware
+    botnets run on distributed machines
+    rootkits installed in privileged area
