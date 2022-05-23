@@ -126,3 +126,30 @@ malware payloads
     spyware, adware
     botnets run on distributed machines
     rootkits installed in privileged area
+
+AAA security services support CIA
+    Authentication
+    Authorization (access control)
+    Accounting (Accountability)
+
+Access control modes
+    mandatory access control (MAC) - based on data sensitivity
+        typical US security clearances (secret, top secret, unclassified, confidential)
+        fine grain data protection
+        immune to insider trojan attacks
+        top secret cannot share data to top secret
+        hard to maintain
+        linux has world, group, owner groups for access control
+    discretionary access control (DAC) - based on owner decision
+    Role Based access control (RBAC) - based on user role
+        ex. minecraft permissions: op, mod, admin, user, guest
+    rule-set based access control (RSBAC) - based on application rules
+        ex. Firewall, close ports or channels based on rules
+    attribute based access control (ABAC) - based on user/data attrivutes; tricky to get right
+        each user has certain attributes, each file can only be accessed if meets attributes required
+        ex professor who is located in California and has class 132 can assign grades for class 132
+
+GOOGLE DORKING <- LOOK AT THIS
+
+SQL Injections:
+    

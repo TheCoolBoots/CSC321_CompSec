@@ -67,6 +67,27 @@ def task1_c_generateData():
     # plt.plot(x, z, '-')
     # plt.show()
 
+def task1_c(hashBitWidth):
+    attemptedHashes = {}
+    currentNum = 0
+    startTime = t.datetime.now()
+    while True:
+        shaHash = hashlib.sha256(str(currentNum).encode('utf-8'))
+        currentHash = int.from_bytes(shaHash.digest(),'big') & (2**hashBitWidth - 1)
+        # print(bin(2**hashBitWidth - 1))
+        # print(hex(currentHash))
+        if currentHash not in attemptedHashes:
+            attemptedHashes[currentHash] = currentNum
+        elif attemptedHashes[currentHash] != currentNum:
+            print(f'{currentNum} and {attemptedHashes[currentHash]} both share the first {hashBitWidth} bits: {bin(currentHash)}')
+            break
+        currentNum += 1
+        endTime = t.datetime.now()
+    print(f'Time elapsed = {endTime - startTime}')
+    print(f'Number of inputs tried = {currentNum}')
+    print(f'Datapoint for graph: ({currentHash}, {endTime - startTime})')
+
+
 def importUserHashes(filepath):
     with open(filepath, 'rb') as inputFile:
         contents = inputFile.readlines()
