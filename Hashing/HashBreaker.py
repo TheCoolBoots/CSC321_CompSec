@@ -1,6 +1,7 @@
 from nltk.corpus import words
 import nltk
 import bcrypt
+import datetime as t
 
 nltk.download('words')
 
@@ -19,7 +20,7 @@ Ori = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8OiERmh0dh8AiNcf7ON3O3P0GWTABKh0O" # airway
 Bifur = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8OMoFL0k33O8Lcq33f6AznAZ/cL1LAOyK" # corrosible
 Bofur = b"$2b$12$rMeWZtAVcGHLEiDNeKCz8Ose2KNe821.l2h5eLffzWoP01DlQb72O" # libellate
 Durin = b"$2b$13$6ypcazOOkUT/a7EwMuIjH.qbdqmHPDAC9B5c37RT9gEw18BX6FOay" # purrone
-hashes = [Bilbo, Gandalf, Thorin, Fili, Kili] #Balin, Dwalin, Oin, Gloin, Dori, Nori, Ori, Bifur, Bofur, Durin]
+hashes = [Bilbo, Gandalf, Thorin, Fili, Kili, Balin, Dwalin, Oin, Gloin, Dori, Nori, Ori, Bifur, Bofur, Durin]
 
 
 filteredWords = []
@@ -35,9 +36,13 @@ with open('foundPasswords.txt', 'w') as outFile:
     for userID, userHash in enumerate(hashes):
         checked = 0
         found = False
+        startTime = t.datetime.now()
+        
         for word in filteredWords:
             if bcrypt.checkpw(word, userHash):
                 print(word)
+                endTime = t.datetime.now()
+                print(f'time elapsed = {endTime-startTime}')
                 outFile.write(word.decode('utf-8') + '\n')
                 found = True
                 break

