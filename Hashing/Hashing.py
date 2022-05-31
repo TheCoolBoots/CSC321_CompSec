@@ -259,4 +259,11 @@ Digest Size = 43
 Time elapsed = 4:11:02.310583
 Number of inputs tried = 2877245
 Digest Size = 44
+5606906 and 359458 both share the first 44 bits: 13125791107623
+Time elapsed = 15:58:04.169478
+Number of inputs tried = 5606906
+Digest Size = 45
+5606906 and 359458 both share the first 45 bits: 30717977152039
+Time elapsed = 15:53:47.737916
+Number of inputs tried = 5606906
 '''
